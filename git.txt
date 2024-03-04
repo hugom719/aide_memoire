@@ -1,0 +1,31 @@
+Git :
+
+git init (creation projet)
+
+git add . (ajout de tout les fichier)
+
+git add -A (ajout des modification)
+
+git commit -m "nouvelle ligne" (mise en place de la nouvelle version)
+
+git push (publication du commit dans un depot en ligne)
+
+git clone (permet d'enregistrer un commit)
+
+git pull (permet d'enregistrer le nouveau commit)
+
+git fetch (permet d'enregister tout les element du depot en ligne)
+
+git branch abc (creation d'une nouvelle branche)
+
+git checkout abc (permet de se rentre sur la branche)
+
+git push --set-upstram origin abc (publication de la branch sur le depot en ligne)
+
+git merge (permet de fussionné 2 commit ensemble)
+
+ls -d */ (liste tout les projets git)
+
+git branch -a (liste toute les branche local)
+
+git branch -v (liste toute les branche distante ainsi que local)

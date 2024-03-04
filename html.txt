@@ -1,0 +1,33 @@
+Voici une liste des balises HTML les plus couramment utilisées :
+
+    <div> : Utilisé pour diviser le contenu de la page en sections logiques ou groupes.
+
+    <p> : Utilisé pour définir un paragraphe de texte.
+
+    <a> : Utilisé pour créer un lien hypertexte vers une autre page ou une autre ressource.
+
+    <img> : Utilisé pour insérer une image dans une page web.
+
+    <ul> : Utilisé pour créer une liste non ordonnée.
+
+    <ol> : Utilisé pour créer une liste ordonnée.
+
+    <li> : Utilisé pour définir un élément de liste dans une liste ordonnée ou non ordonnée.
+
+    <h1>, <h2>, <h3>, <h4>, <h5>, <h6> : Utilisés pour définir les titres de différentes tailles.
+
+    <span> : Utilisé pour appliquer du style ou des scripts à une partie spécifique du texte.
+
+    <input> : Utilisé pour créer des éléments de formulaire interactifs.
+
+    <form> : Utilisé pour créer un formulaire qui permet à l'utilisateur de saisir des données.
+
+    <button> : Utilisé pour créer un bouton cliquable.
+
+    <table> : Utilisé pour créer un tableau.
+
+    <tr> : Utilisé pour définir une ligne dans un tableau.
+
+    <td> : Utilisé pour définir une cellule de données dans un tableau.
+
+Ces balises constituent une base solide pour la création de pages web et sont largement utilisées dans la plupart des sites web. Bien sûr, il existe de nombreuses autres balises HTML pour une variété d'utilisations spécifiques, mais celles-ci sont parmi les plus fondamentales et les plus utilisées.
