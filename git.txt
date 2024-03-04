@@ -1,4 +1,4 @@
-Git :
+git :
 
 git init (creation projet)
 
