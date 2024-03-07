@@ -1,1 +1,4 @@
 SQL :
+
+CREATE USER 'toto'@'localhost' IDENTIFIED BY 'toto123'; (creation d'un utilisateur)
+
