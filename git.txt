@@ -29,3 +29,7 @@ ls -d */ (liste tout les projets git)
 git branch -a (liste toute les branche local)
 
 git branch -v (liste toute les branche distante ainsi que local)
+
+git remote add <nom-remote> <URL-du-dépôt-GitHub> (atribuer l'URL)
+
+git remote set-url origin git@github.com:utilisateur/nom-depot.git (cahnger l'URL)

@@ -1,0 +1,49 @@
+--------------------------------
+SQL
+--------------------------------
+
+
+utilisateur :
+
+CREATE USER 'toto'@'localhost' IDENTIFIED BY 'toto123'; (creation d'un utilisateur)
+
+ALTER user 'root'@'localhost' identified by 'root'; (changement mots de passe)
+--------------------------------
+
+
+base de donnée :
+
+SHOW DATABASES; (montre toute les bases de données)
+
+CREATE DATABASE `test`; (creation d'une base de donnée)
+
+CREATE DATABASE IF NOT EXISTS `test`; (creation d'une base de donnée si cela la n'existe pas)
+
+USE `totodb` (selectionné une base de donnée)
+
+DROP DATABASE `totodb` (suprimer base de donnée)
+--------------------------------
+
+
+Table :
+
+SHOW TALBES; (liste les tables de la base de donnée dans la quelle vous étes)
+SHOW TABLES FROM `totodb`; (liste les tables de la base de donnée selectionné)
+CREATE TABLE IF NOT EXISTS `t_toto` (creation d'une talbe)
+(
+    `id_user` INT,
+    `user_name` VARCHAR(65),
+    `user_birthday` DATE
+);
+DESCRIBE `t_toto`; (affichage des champs d'une table donnée (EXPLAIN ou DESC peuvent remplacé DESCRIBE))
+--------------------------------
+
+
+commentaire
+
+-- abcdefga (commentaire sur une ligne)
+
+# abcdefga (commentaire sur une ligne)
+
+/* abcdefga*/ (commentaire sur plusieurs lignes)
+--------------------------------
