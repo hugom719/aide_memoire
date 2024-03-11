@@ -21,29 +21,50 @@ CREATE DATABASE IF NOT EXISTS `test`; (creation d'une base de donnée si cela la
 
 USE `totodb` (selectionné une base de donnée)
 
+USE mysql (sortir d'une base de donnée)
+
 DROP DATABASE `totodb` (suprimer base de donnée)
 --------------------------------
 
 
 Table :
 
-SHOW TALBES; (liste les tables de la base de donnée dans la quelle vous étes)
+SHOW TABLES; (liste les tables de la base de donnée dans la quelle vous étes)
+
 SHOW TABLES FROM `totodb`; (liste les tables de la base de donnée selectionné)
-CREATE TABLE IF NOT EXISTS `t_toto` (creation d'une talbe)
+
+CREATE TABLE IF NOT EXISTS `t_toto`
 (
     `id_user` INT,
     `user_name` VARCHAR(65),
     `user_birthday` DATE
-);
+); (creation d'une talbe)
+
 DESCRIBE `t_toto`; (affichage des champs d'une table donnée (EXPLAIN ou DESC peuvent remplacé DESCRIBE))
+
+ALTER TABLE `t_toto`
+ADD `user_points` INT, #ajout champs
+DROP `user_birthday`, #supresion champs
+MODIFY id_user SMALLINT, #modification type de donnée champs
+CHANGE `user_name` `user_na` varchar(65) #modification nom champs et type de donnée
+;(modfier les champs d'une talbe)
+
+SHOW TABLE STATUS; (affichage information détallé de la table)
+
+DROP TALBE IF EXIST `t_toto`; (suprimer la table)
 --------------------------------
 
 
 commentaire
 
--- abcdefga (commentaire sur une ligne)
-
 # abcdefga (commentaire sur une ligne)
 
 /* abcdefga*/ (commentaire sur plusieurs lignes)
+--------------------------------
+
+
+contraintes
+
+NOT NULL (le champs dois etre obligatoirement remplie (exemple : `id_users` SMALLINT(6) NOT NUL;))
+DEFAULT (attribue une valeur par defaut (exemple : 1 `table_users` ALTER `users_admin` SET DEFAULT 0;))
 --------------------------------
