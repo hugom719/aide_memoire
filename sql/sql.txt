@@ -2,16 +2,16 @@
 SQL
 --------------------------------
 
-
-utilisateur :
+------------------------------------------------------------------------------------------------------
+UTILISATEUR
 
 CREATE USER 'toto'@'localhost' IDENTIFIED BY 'toto123'; (creation d'un utilisateur)
 
 ALTER user 'root'@'localhost' identified by 'root'; (changement mots de passe)
---------------------------------
+------------------------------------------------------------------------------------------------------
 
-
-base de donnée :
+------------------------------------------------------------------------------------------------------
+BASE DE DONNEE
 
 SHOW DATABASES; (montre toute les bases de données)
 
@@ -24,10 +24,11 @@ USE `totodb` (selectionné une base de donnée)
 USE mysql (sortir d'une base de donnée)
 
 DROP DATABASE `totodb` (suprimer base de donnée)
---------------------------------
+------------------------------------------------------------------------------------------------------
 
 
-Table :
+------------------------------------------------------------------------------------------------------
+TALBE
 
 SHOW TABLES; (liste les tables de la base de donnée dans la quelle vous étes)
 
@@ -38,7 +39,10 @@ CREATE TABLE IF NOT EXISTS `t_toto`
     `id_user` INT,
     `user_name` VARCHAR(65),
     `user_birthday` DATE
-); (creation d'une talbe)
+)
+ENGINE = MyISAM
+CHARACTER SET utf8mb4
+COLLATE UTF8mb4_inicode_ci; (creation d'une talbe)
 
 DESCRIBE `t_toto`; (affichage des champs d'une table donnée (EXPLAIN ou DESC peuvent remplacé DESCRIBE))
 
@@ -52,19 +56,206 @@ CHANGE `user_name` `user_na` varchar(65) #modification nom champs et type de don
 SHOW TABLE STATUS; (affichage information détallé de la table)
 
 DROP TALBE IF EXIST `t_toto`; (suprimer la table)
---------------------------------
+------------------------------------------------------------------------------------------------------
 
 
-commentaire
+------------------------------------------------------------------------------------------------------
+COMMENTAIRE
 
 # abcdefga (commentaire sur une ligne)
 
 /* abcdefga*/ (commentaire sur plusieurs lignes)
---------------------------------
+------------------------------------------------------------------------------------------------------
 
 
-contraintes
+------------------------------------------------------------------------------------------------------
+CONTRAINTES
+
+
+NOT NULL:
 
 NOT NULL (le champs dois etre obligatoirement remplie (exemple : `id_users` SMALLINT(6) NOT NUL;))
+
+ALTER TABLE table_users MODIFY id_users SMALLINT NULL; (modification de la contrainte NOT NULL)
+
+
+DEFAULT:
+
 DEFAULT (attribue une valeur par defaut (exemple : 1 `table_users` ALTER `users_admin` SET DEFAULT 0;))
---------------------------------
+
+ALTER `t_toto` ALTER `user_admin` DROP DEFAULT (supresion des contraintes)
+
+
+CHECK :
+
+`id_user` SMALLINT(6) NOT NULL CHECK(id_user <= 10000) (initialisation du check lors de la creation de la colonne)
+
+ALTER TABLE `table_users` ADD CHECK(id_user <= 10000); (permet de ajouter un check a une colonne existante)
+
+ALTER TABLE `table_users` ADD CONSTRAINT CHK_idtoobig CHECK(id_user <= 10000 AND user_admin > 1)
+
+ALTER TABLE `table_users` DROP CHECK `CHK_idtoobig`; (Supresion des contrainte)
+
+
+UNIQUE :
+
+UNIQUE(`user_name`) (metre cela apres la ligne de la creation de la colonne)
+
+ALTER TABLE `table_users` ADD UNIQUE(`user_name`) (modification de la colonne pour lui ajouter un unique)
+
+ALTER TABLE `table_users` ADD CONSTRAINT UC_userid UNIQUE(`id_user`,`user_name`); (modification de plusieurs colonnes pour leur ajouter un unique)
+
+ALTER TABLE `table_users` DROP INDEX `UC_userid`; (Supresion des contrainte ce met lors de la creation de la table)
+
+
+PRIMARY KEY :
+
+PRIMARY KEY(`id_user`) (metre cela apres la ligne de la creation de la colonne)
+
+ALTER TABLE `table_users` ADD PRIMARY KEY (`id_user`);
+
+ADD CONSTRAINT PK_ident PRIMARY KEY(`id_user`,`user_name`); (ajoute de clef primiaire dans plusieur colonne apres le premier enregistrement)
+
+ALTER TABLE `table_users` DROP PRIMARY KEY;
+
+
+FOREIGN KEY :
+
+FOREIGN KEY(`news_author`) REFERENCES `table_users`(`id_user`);
+
+ALTER TABLE `table_news` ADD FOREIGN KEY(`news_author`) REFERENCES `table_users`(`id_user`);
+
+ADD CONSTRAINT clefsecondaire ALTER TABLE `table_news` ADD FOREIGN KEY(`news_author`) REFERENCES `table_users`(`id_user`);
+
+DROP FOREIGN KEY ´clefsecondaire´;
+
+
+AUTO_INCREMENT :
+
+`id_user` SMALLINT(6) NOT NULL AUTO_INCREMENT, (metre cela lors de la creation de la table)
+
+ALTER TABLE `table_users` AUTO_INCREMENT = 100; (changement de la valeur de l'autoincrementation)
+
+INDEX :
+
+CREATE INDEX `idx_users` ON `table_users`(`user_name`,`user_email`); (definition d'un index);
+
+DROP INDEX `idx_users`;
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+utilisateurs et privilèges
+
+CREATE USER IF NOT EXISTS 'hugo'@'localhost' IDENTIFIED BY 'hugo';
+
+ALTER USER 'hugo'@'localhost' IDENTIFIED BY 'nouveaumotdepasse';
+
+RENAME USER `hugo`@`localhost` TO `ugo`@`localhost`;
+
+DROP USER `ugo`@`localhost`;
+
+GRANT ALL ON base_hugo.* TO `ugo`@`localhost`(atribution de tout les droit pour la base de donné hugo sur toute les tables)
+
+REVOKE ALL ON base_hugo.* FROM `ugo`@`localhost` (supresion des droits atribuer)
+
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+LECTURE DONNEE
+
+source C:/Users/user/Downloads/data1.sql (execution de script)
+
+SELECT `product_name` FROM `fv_products`; (lecuture des information d'une colonne d'une table)
+
+SELECT `product_name`,`prodcut_amount` FROM `fv_products`; 
+
+SELECT * FROM `fv_products`; (lecture de toute les information d'une colonnes d'une tables)
+
+SELECT DISTINCT `product_name` FROM `fv_products`; (LECTURE des information d'une colonne sans champs identique)
+
+SELECT `product_name` AS "nom produit" FROM `fv_products` AS produit; (creation d'une alias)
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+FILTRER REQUETTE
+
+operateur de comparaison :
+= égalité
+!= diferance 
+> < <= >= plus grand que & plus petit que && etc
+AND (est)
+OR (ou)
+
+WHERE (condition) :
+exemple1 : SELECT * FORM fv_games WHERE id_game = 1;
+exemple2 : SELECT * FROM fv_games WHERE id_game=1 OR id_game=11;
+exemple3 : SELECT * FROM fv_games WHERE game_price>5 AND game_price<30;
+
+IN : (dans)
+exemple : SELECT * FROM fv_games WHERE id_game IN(1,5,11); (selectionne les champs ayant en id_game 1, 5 et 11)
+
+BETWEEN : (entre)
+SELECT * FROM fv_games WHERE game_price BETWEEN 5 AND 30; (selectionne toute les champs ayen un game price de 5 a 30 euro)
+
+LIKE : (commence)
+SELECT * FROM fv_games WHERE game_title LIKE 'Pokémon%'; (selectionne les champs commencent par Pokémon) un ou plusieurs caractere
+SELECT * FROM fv_games WHERE game_title LIKE 'Tekken_'; (selectionne les champs ayant Tekken dans leur champs puis seulement un autre caractere apres celui la) 1 caractere
+
+IS NOT NULL :
+SELECT * FROM fv_games WHERE game_price IS NOT NULL; (retourne tout les element acec un prix non null)
+
+IS NULL
+SELECT * FROM fv_games WHERE game_price IS NULL; (retourne tout les element acec un prix null)
+
+ORDER BY : 
+SELECT * FROM fv_games ORDER BY game_title ASC; (ordre croissant)
+SELECT * FROM fv_games ORDER BY game_title DESC; (ordre decroissant)
+SELECT * FROM fv_games ORDER BY game_title, game,price DESC; (trie d'abbord les titre par ordre decroissant et si le nom est le meme trier le prix par ordre decroisant)
+
+LIMIT(ROWNUM oracle) :
+
+SELECT * FROM fv_games LIMIT 5; (limite le nombre de sortie a 5 (cela n'est pas plus optimisé))
+SELECT * FROM fv_games LIMIT 5 OFFSET 3; (sort 5 enregistrement en commence par l'id numero 4)
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+ENREGISTRELENT ET DONNEES
+
+INSERT INTO `fv_clients` (client_firstname,client_lastname, client_birthday,client_loyalty)
+VALUES('Hugo','Mercier','2002-04-02',21); (enregistrement de donné dans une table)
+
+INSERT INTO `fv_clients` (client_firstname,client_lastname, client_birthday,client_loyalty)
+VALUES('Hugo','Mercier','2002-04-02',21),('edward','jean','2009-11-03',12); (enregistrement de donné dans une table)
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+MODIFICATION ET SUPPRIMER
+
+UPDATE :
+UPDATE fv_games SET game_stock = 6 WHERE id_game = 1; (changement du stock sur l'enregistrement id 1)
+UPDATE fv_games SET game_stock = 6, game_price=1 WHERE id_game = 1; (changement du stock et du prix sur l'enregistrement id 1)
+UPDATE fv_games SET game_stock = 6, game_price=1; (changement du stock et du prix sur les champs de tous les enregistrement)
+
+DELETE :
+DELETE FROM fv_games WHERE game_title='Tekken'; (supresion du jeu tekken)
+DELETE FROM fv_games; (supresion de tout les enregistrements)
+------------------------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------------------------
+FONCTION D'AGREGAT
+
+SELECT COUNT(*) FROM fv_games; (compte tout les enregistrement)
+
+SELECT AVG(game.price) FROM fv_games; (calucle de la moyenne sur les enregistrement du prix)
+
+SELECT MAX(game.price) FROM fv_games; (retourne la valeur maximum)
+
+SELECT MIN(game.price) FROM fv_games; (retourne la valeur minimum)
+
+SELECT SUM(game_stock) FROM fv_games; (retourne la somme des stocks enregistrer)           
+------------------------------------------------------------------------------------------------------
