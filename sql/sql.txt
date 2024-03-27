@@ -259,3 +259,22 @@ SELECT MIN(game.price) FROM fv_games; (retourne la valeur minimum)
 
 SELECT SUM(game_stock) FROM fv_games; (retourne la somme des stocks enregistrer)           
 ------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+GROUPER RESULTATS
+
+
+GROUP BY :
+SELECT COUNT(*),user_country FROM fv_users GROUP BY user_country; (permet de grouper les pays)
+
+SELECT user_country, SUM(user_age) FROM fv_users GROUP BY user_country; (permet de faire la somme de touts le age par pays)
+
+SELECT user_country, SUM(user_age) FROM fv_users GROUP BY user_country WITH ROLLUP; (idem precedent mais WITH ROLLUP permet de mieux réagencé la table)
+
+HAVING :
+SELECT user_country, SUM(user_age)
+FROM fv_users
+GROUP BY user_country
+HAVING sum(user_age) > 20; (permet de filter apres un groupement et permet aussi de filtre une fonction telle que sum)
+------------------------------------------------------------------------------------------------------
