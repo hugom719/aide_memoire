@@ -278,3 +278,45 @@ FROM fv_users
 GROUP BY user_country
 HAVING sum(user_age) > 20; (permet de filter apres un groupement et permet aussi de filtre une fonction telle que sum)
 ------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+UNIONS & INTERSECTIONS
+
+UNION :
+
+SELECT * FROM "fv_site1_users" 
+UNION 
+SELECT * FROM "fv_site2_users"; (permet de faire l'union de deux et elimine les doublons (attention les champs selectionné doivent etre identique))
+
+select user_name from fv_site1_users UNION select user_name from fv_site2_users; (autre exemple cette instruction ne prend en compte que les nom d'utilisateur)
+
+select user_name from fv_site1_users UNION select user_name from fv_site2_users 
+ORDER BY user_name; (idem au dessus mais trie par nom)
+
+SELECT * FROM "fv_site1_users" 
+UNION ALL
+SELECT * FROM "fv_site2_users"; (idem que le premier mais affiche aussi les doublons)
+
+INTERSECT :
+
+SELECT * FROM "fv_site1_users" 
+INTERSECT 
+SELECT * FROM "fv_site2_users"; (permet d'afficher tous les element en commun des 2 tables)
+
+MINUS&EXEPCT :
+
+SELECT * FROM "fv_site1_users" 
+MINUS ou EXCEPT
+SELECT * FROM "fv_site2_users"; (affiche les element de la premiere requete qui ne sont pas present dans la 2eme)
+
+
+------------------------------------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------------------------------------
+
+SOUS REQUETES
+
+
+------------------------------------------------------------------------------------------------------
